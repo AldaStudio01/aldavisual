@@ -335,7 +335,7 @@ function box(path,kind,alt,cls){
   const d=document.createElement('div');d.className='m r'+(cls?' '+cls:'');
   const l=document.createElement('span');l.textContent=kind==='yt'?'youtube.com/watch?v='+path:[].concat(path)[0];d.append(l);
   if(kind==='img'){const c=[].concat(path);let n=0;const i=new Image();i.alt=alt;i.loading='lazy';i.onload=()=>d.classList.add('ok');i.onerror=()=>{if(++n<c.length)i.src=c[n];else i.remove()};i.src=c[0];d.append(i)}
-  else if(kind==='yt'){const f=document.createElement('iframe');f.src=`https://www.youtube-nocookie.com/embed/${path}?rel=0&playsinline=1&modestbranding=1`;f.title=alt||'Video de ALDA VISUAL';f.loading='lazy';f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';f.allowFullscreen=true;f.referrerPolicy='strict-origin-when-cross-origin';d.append(f)}
+  else if(kind==='yt'){const f=document.createElement('iframe');f.src=`https://www.youtube.com/embed/${path}?rel=0&playsinline=1&modestbranding=1`;f.title=alt||'Video de ALDA VISUAL';f.loading='lazy';f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';f.allowFullscreen=true;f.referrerPolicy='strict-origin-when-cross-origin';d.append(f)}
   else{const v=document.createElement('video');v.controls=true;v.playsInline=true;v.preload='metadata';v.onerror=()=>v.remove();v.src=path;d.append(v)}
   return d}
 PORTFOLIO.forEach(c=>{
