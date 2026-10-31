@@ -108,18 +108,21 @@ nav.s{background:rgba(13,13,13,.78);backdrop-filter:blur(14px);border-color:var(
 .st:hover em{color:var(--lime)}
 .st h3{font-size:1.7rem;font-weight:800;margin:.6rem 0}
 .st p{color:var(--mute);font-size:1rem}
-/* testimonials */
-.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
-.t{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:2.2rem;display:flex;flex-direction:column;justify-content:space-between;gap:2rem;transition:.5s var(--e)}
-.t:hover{border-color:var(--lime);transform:translateY(-6px)}
-.t:first-child{background:var(--lime);color:#0D0D0D;border-color:var(--lime)}
-.t:first-child .who span{color:rgba(13,13,13,.65)}
-.t p{font-family:var(--d);font-size:1.3rem;line-height:1.35;letter-spacing:-.01em}
-.who{display:flex;gap:.9rem;align-items:center}
-.av{width:46px;height:46px;border-radius:50%;background:#0D0D0D;color:var(--lime);display:grid;place-items:center;font-family:var(--d);font-weight:800}
-.t:not(:first-child) .av{background:var(--lime);color:#0D0D0D}
-.who b{display:block;font-weight:500;line-height:1.2}
-.who span{font-size:.88rem;color:var(--mute)}
+/* portfolios */
+.pf{border-top:1px solid var(--line)}
+.pf-title{font-size:clamp(3.2rem,13vw,12rem);font-weight:800;line-height:.9;letter-spacing:-.05em}
+.pf-intro{color:var(--mute);max-width:36rem;margin:1.6rem 0 clamp(3rem,8vw,7rem)}
+.cs{padding:clamp(3rem,7vw,6rem) 0 clamp(1rem,3vw,2rem);border-top:1px solid var(--line)}
+.cs-h{display:grid;grid-template-columns:5rem 1fr 1fr;gap:1.5rem clamp(1.5rem,4vw,4rem);align-items:start;margin-bottom:2.5rem}
+.cs-n{font-family:var(--d);font-weight:800;font-size:1.2rem;color:var(--lime)}
+.cs-h h3{font-size:clamp(1.8rem,3.6vw,3rem);font-weight:800}
+.cs-h p{color:var(--mute);max-width:30rem}
+.m{position:relative;border-radius:24px;overflow:hidden;background:var(--card);border:1px solid var(--line);aspect-ratio:16/9;margin-top:1.25rem}
+.m img,.m video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:var(--card)}
+.m img{transition:transform 1.2s var(--e)}.m:hover img{transform:scale(1.03)}
+.m span{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:1rem;color:var(--mute);font-size:.9rem;word-break:break-all;background:repeating-linear-gradient(135deg,transparent 0 18px,rgba(255,255,255,.03) 18px 36px)}
+.clips{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:1.25rem}.clips .m{margin-top:0}
+@media(max-width:960px){.cs-h{grid-template-columns:1fr}.clips{grid-template-columns:1fr}.clips .m{margin-top:0}}
 /* contact */
 .ct{background:var(--card);border:1px solid var(--line);border-radius:36px;padding:clamp(2rem,6vw,5rem);display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);position:relative;overflow:hidden}
 .ct::before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:var(--lime);filter:blur(130px);opacity:.14;right:-120px;top:-120px;pointer-events:none}
@@ -181,7 +184,7 @@ footer p{color:var(--mute);margin-top:.4rem}
 <section id="sobre-mi"><div class="wrap about">
 <div class="photo r">
 <!-- Reemplaza "aldair.jpg" por tu fotografía (formato vertical 4:5 recomendado) -->
-<img src="PERFIL JON.png" alt="Retrato de Aldair Cuá, fundador de ALDA VISUAL">
+<img src="aldair.jpg" alt="Retrato de Aldair Cuá, fundador de ALDA VISUAL" onerror="this.style.display='none'">
 <span class="tag">Aldair Cuá</span>
 </div>
 <div class="r">
@@ -195,9 +198,9 @@ footer p{color:var(--mute);margin-top:.4rem}
 <section id="especialidades" style="padding-top:0"><div class="wrap">
 <div class="head r"><h2>Lo que hago mejor</h2><p>Tres especialidades que trabajan juntas para que tu marca se vea, suene y se sienta coherente.</p></div>
 <div class="cards">
-<article class="card r"><svg class="ic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="6" width="32" height="52" rx="7"/><path d="M28 50h8"/><circle cx="32" cy="26" r="7"/><path d="M32 19v-6M39 26h6"/></svg><div><h3>Social Media</h3><p>Creación de contenido estratégico para posicionar marcas y generar conexión con clientes.</p></div></article>
-<article class="card r"><svg class="ic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6l7 14 15 2-11 11 3 15-14-8-14 8 3-15L10 22l15-2z"/><path d="M32 58V46"/></svg><div><h3>Branding</h3><p>Construcción de identidades visuales memorables, funcionales y diferenciadoras.</p></div></article>
-<article class="card r"><svg class="ic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="14" width="38" height="36" rx="7"/><path d="M44 28l14-8v24l-14-8z"/><circle cx="25" cy="32" r="6"/></svg><div><h3>Audiovisual</h3><p>Producción de contenido visual atractivo que comunica y conecta.</p></div></article>
+<a class="card r" href="#social-media" aria-label="Ver portafolio de Social Media"><svg class="ic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="6" width="32" height="52" rx="7"/><path d="M28 50h8"/><circle cx="32" cy="26" r="7"/><path d="M32 19v-6M39 26h6"/></svg><div><h3>Social Media</h3><p>Creación de contenido estratégico para posicionar marcas y generar conexión con clientes.</p></div></a>
+<a class="card r" href="#branding" aria-label="Ver portafolio de Branding"><svg class="ic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6l7 14 15 2-11 11 3 15-14-8-14 8 3-15L10 22l15-2z"/><path d="M32 58V46"/></svg><div><h3>Branding</h3><p>Construcción de identidades visuales memorables, funcionales y diferenciadoras.</p></div></a>
+<a class="card r" href="#audiovisual" aria-label="Ver portafolio de Audiovisual"><svg class="ic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="14" width="38" height="36" rx="7"/><path d="M44 28l14-8v24l-14-8z"/><circle cx="25" cy="32" r="6"/></svg><div><h3>Audiovisual</h3><p>Producción de contenido visual atractivo que comunica y conecta.</p></div></a>
 </div></div></section>
 
 <section id="proyectos" style="padding-top:0"><div class="wrap">
@@ -220,13 +223,14 @@ footer p{color:var(--mute);margin-top:.4rem}
 <div class="st"><em>4</em><h3>Resultados</h3><p>Medimos, ajustamos y consolidamos una marca que crece con propósito.</p></div>
 </div></div></section>
 
-<section id="testimonios" style="padding-top:0"><div class="wrap">
-<div class="head r"><h2>Lo que dicen mis clientes</h2></div>
-<div class="tg">
-<figure class="t r"><p>“Nuestras redes pasaron de publicar por publicar a tener una línea clara. Los clientes ahora nos reconocen y nos escriben más.”</p><figcaption class="who"><div class="av">MR</div><div><b>María Reyes</b><span>Propietaria, restaurante</span></div></figcaption></figure>
-<figure class="t r"><p>“Aldair entendió nuestra cooperativa y la tradujo en una identidad seria, moderna y fácil de recordar.”</p><figcaption class="who"><div class="av">CM</div><div><b>Carlos Méndez</b><span>Gerente, cooperativa</span></div></figcaption></figure>
-<figure class="t r"><p>“Cumple tiempos, propone ideas con sentido y cuida cada detalle. Trabajar con él nos dio confianza desde el primer día.”</p><figcaption class="who"><div class="av">LP</div><div><b>Lucía Pérez</b><span>Directora comercial</span></div></figcaption></figure>
-</div></div></section>
+<!-- ============================================================
+     PORTFOLIOS (Social Media / Branding / Audiovisual)
+     Se generan automáticamente desde el bloque "PORTFOLIO CONFIG"
+     al final de este archivo. Para cambiar títulos, descripciones o
+     cantidad de medios, edita ese bloque. Para cambiar imágenes y
+     videos, sube tus archivos a GitHub con los mismos nombres de ruta.
+     ============================================================ -->
+<div id="portfolio"></div>
 
 <section id="contacto" style="padding-top:0"><div class="wrap"><div class="ct r">
 <div><h2>Hablemos de tu próximo proyecto</h2><p>Cuéntame qué quieres lograr con tu marca y te respondo con una propuesta clara.</p>
@@ -244,6 +248,48 @@ footer p{color:var(--mute);margin-top:.4rem}
 <footer><div class="wrap"><b>ALDA VISUAL</b><p>Social Media • Branding • Audiovisual</p><p style="margin-top:1.5rem;font-size:.9rem">© 2026</p></div></footer>
 
 <script>
+/* ============================================================
+   PORTFOLIO CONFIG
+   - title / desc: textos de cada proyecto (reemplaza los placeholders).
+   - Imágenes: assets/<folder>/projectNN/imageNN.jpg
+   - Audiovisual: assets/audiovisual/projectNN/clip01.mp4 ... clip03.mp4
+                  y assets/audiovisual/projectNN/full-video.mp4
+   - Para reemplazar un medio: sube tu archivo a GitHub con ese mismo
+     nombre y ruta. Mientras no exista, se muestra un recuadro placeholder.
+   - count: cantidad de imágenes por proyecto.
+   ============================================================ */
+const ph=()=>Array.from({length:4},()=>({title:'Project Title Placeholder',desc:'Project Description Placeholder'}));
+const PORTFOLIO=[
+{id:'social-media',title:'SOCIAL MEDIA',folder:'social-media',type:'img',count:4,intro:'Category introduction placeholder.',projects:ph()},
+{id:'branding',title:'BRANDING',folder:'branding',type:'img',count:5,intro:'Category introduction placeholder.',projects:ph()},
+{id:'audiovisual',title:'AUDIOVISUAL',folder:'audiovisual',type:'video',clips:3,intro:'Category introduction placeholder.',projects:ph()}
+];
+(function(){
+const pad=n=>String(n).padStart(2,'0'),root=document.getElementById('portfolio');
+function box(path,kind,alt){
+  const d=document.createElement('div');d.className='m r';
+  const l=document.createElement('span');l.textContent=path;d.append(l);
+  if(kind==='img'){const i=new Image();i.alt=alt;i.loading='lazy';i.onerror=()=>i.remove();i.src=path;d.append(i)}
+  else{const v=document.createElement('video');v.controls=true;v.playsInline=true;v.preload='metadata';v.onerror=()=>v.remove();v.src=path;d.append(v)}
+  return d}
+PORTFOLIO.forEach(c=>{
+  const s=document.createElement('section');s.id=c.id;s.className='pf';
+  const w=document.createElement('div');w.className='wrap';
+  w.innerHTML=`<h2 class="pf-title r">${c.title}</h2><p class="pf-intro r">${c.intro}</p>`;
+  c.projects.forEach((p,k)=>{
+    const dir=`assets/${c.folder}/project${pad(k+1)}/`,a=document.createElement('article');a.className='cs';
+    const h=document.createElement('div');h.className='cs-h r';
+    h.innerHTML=`<span class="cs-n">${pad(k+1)}</span><h3></h3><p></p>`;
+    h.querySelector('h3').textContent=p.title;h.querySelector('p').textContent=p.desc;a.append(h);
+    if(c.type==='img'){for(let i=1;i<=c.count;i++)a.append(box(`${dir}image${pad(i)}.jpg`,'img',`${p.title} ${pad(i)}`))}
+    else{
+      const g=document.createElement('div');g.className='clips';
+      for(let i=1;i<=c.clips;i++)g.append(box(`${dir}clip${pad(i)}.mp4`,'video'));
+      a.append(g,box(`${dir}full-video.mp4`,'video'));
+    }
+    w.append(a)});
+  s.append(w);root.append(s)});
+})();
 const nav=document.getElementById('nav'),lk=document.getElementById('lk'),bg=document.getElementById('bg');
 addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>40),{passive:true});
 bg.onclick=()=>{const o=lk.classList.toggle('o');bg.setAttribute('aria-expanded',o)};
