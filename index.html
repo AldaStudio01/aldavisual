@@ -130,6 +130,10 @@ nav.s{background:rgba(13,13,13,.78);backdrop-filter:blur(14px);border-color:var(
 /* Videos: proporción original, sin recorte ni deformación */
 .m-v{aspect-ratio:9/16}
 .m-h{aspect-ratio:16/9}
+/* Imágenes con proporción original (se activa con "images" en un proyecto) */
+.m-nat.ok{aspect-ratio:auto}
+.m-nat.ok img{position:static;height:auto;object-fit:initial}
+.m-nat.ok span{display:none}
 .m-full-v{width:100%;max-width:420px;margin-inline:auto}
 .m video{object-fit:contain;background:#000}
 @media(max-width:960px){.cs-h{grid-template-columns:1fr}.cs-d>div{grid-template-columns:6rem 1fr}}
@@ -265,6 +269,9 @@ footer p{color:var(--mute);margin-top:.4rem}
    PORTFOLIO CONFIG
    - title / client / challenge / solution: textos de cada proyecto.
    - Imágenes: assets/<folder>/projectNN/imageNN.jpg
+   - images (opcional, por proyecto): nombres de archivo SIN extensión dentro de
+     la carpeta del proyecto. El sitio prueba jpg, jpeg, png y webp (también en
+     mayúsculas) y muestra la imagen con su proporción original. Respeta el orden.
    - orientation (solo Audiovisual): 'vertical' = 9:16, 'horizontal' = 16:9; aplica a los 3 clips y al video completo de ese proyecto.
    - Audiovisual: assets/audiovisual/projectNN/clip01.mp4 ... clip03.mp4
                   y assets/audiovisual/projectNN/full-video.mp4
@@ -281,7 +288,7 @@ const PORTFOLIO = [
     count:4,
     intro:'Proyectos enfocados en posicionamiento y crecimiento de marca.',
     projects:[
-      {title:'Contenido gastronómico',client:'Kaqík',challenge:'Posicionar un restaurante tradicional destacando platillos y novedades.',solution:'Sesión de fotos profesional y contenido alineado a la identidad de la marca.'},
+      {title:'Contenido gastronómico',images:['1.SOCIAL','2.SOCIAL','3.SOCIAL','4.SOCIAL'],client:'Kaqík',challenge:'Posicionar un restaurante tradicional destacando platillos y novedades.',solution:'Sesión de fotos profesional y contenido alineado a la identidad de la marca.'},
       {title:'Historias para redes',client:'Comercial Renoj S.A.',challenge:'Historias para redes visualmente atractivas bajo su línea gráfica.',solution:'Diseño limpio, estético y con la medida adecuada.'},
       {title:'Publicaciones de productos',client:'Comercial Renoj S.A.',challenge:'Posts ofreciendo la variedad de productos manteniendo iconos de redes.',solution:'Plan estratégico mensual de publicaciones con diseño estético y profesional.'},
       {title:'Campaña de independencia',client:'Panadería y pastelería Caprice',challenge:'Campaña visual para fechas de independencia respetando su línea gráfica.',solution:'Imagen atractiva con fotos llamativas, colores patrios y copy pegajoso.'}
@@ -318,10 +325,11 @@ const PORTFOLIO = [
 ];
 (function(){
 const pad=n=>String(n).padStart(2,'0'),root=document.getElementById('portfolio');
+const EXT=['jpg','jpeg','png','webp','JPG','JPEG','PNG','WEBP'];
 function box(path,kind,alt,cls){
   const d=document.createElement('div');d.className='m r'+(cls?' '+cls:'');
-  const l=document.createElement('span');l.textContent=path;d.append(l);
-  if(kind==='img'){const i=new Image();i.alt=alt;i.loading='lazy';i.onerror=()=>i.remove();i.src=path;d.append(i)}
+  const l=document.createElement('span');l.textContent=[].concat(path)[0];d.append(l);
+  if(kind==='img'){const c=[].concat(path);let n=0;const i=new Image();i.alt=alt;i.loading='lazy';i.onload=()=>d.classList.add('ok');i.onerror=()=>{if(++n<c.length)i.src=c[n];else i.remove()};i.src=c[0];d.append(i)}
   else{const v=document.createElement('video');v.controls=true;v.playsInline=true;v.preload='metadata';v.onerror=()=>v.remove();v.src=path;d.append(v)}
   return d}
 PORTFOLIO.forEach(c=>{
@@ -338,7 +346,8 @@ PORTFOLIO.forEach(c=>{
     h.querySelector('.ch').textContent=p.challenge;
     h.querySelector('.so').textContent=p.solution;
     a.append(h);
-    if(c.type==='img'){for(let i=1;i<=c.count;i++)a.append(box(`${dir}image${pad(i)}.jpg`,'img',`${p.title} ${pad(i)}`))}
+    if(c.type==='img'&&p.images){p.images.forEach((nm,j)=>a.append(box(EXT.map(e=>`${dir}${nm}.${e}`),'img',`${p.title} ${pad(j+1)}`,'m-nat')))}
+    else if(c.type==='img'){for(let i=1;i<=c.count;i++)a.append(box(`${dir}image${pad(i)}.jpg`,'img',`${p.title} ${pad(i)}`))}
     else{
       const v=p.orientation==='vertical',oc=v?'m-v':'m-h';
       const g=document.createElement('div');g.className='clips '+(v?'clips-v':'clips-h');
