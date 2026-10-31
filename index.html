@@ -264,9 +264,34 @@ const ph = () => Array.from({ length: 4 }, () => ({
   title: 'SOCIAL MEDIA 001',
   desc: 'Desafío: Posicionar un restaurante de comida tradicional en redes sociales, destacando sus platillos y novedades para atraer clientes. Solución: Se realizó una sesión fotográfica profesional y se desarrolló contenido alineado con la identidad de la marca para fortalecer su presencia y posicionamiento en redes sociales.'
 }));
-{id:'social-media',title:'SOCIAL MEDIA',folder:'social-media',type:'img',count:4,intro:'Category introduction placeholder.',projects:ph()},
-{id:'branding',title:'BRANDING',folder:'branding',type:'img',count:5,intro:'Category introduction placeholder.',projects:ph()},
-{id:'audiovisual',title:'AUDIOVISUAL',folder:'audiovisual',type:'video',clips:3,intro:'Category introduction placeholder.',projects:ph()}
+const PORTFOLIO = [
+  {
+    id:'social-media',
+    title:'SOCIAL MEDIA',
+    folder:'social-media',
+    type:'img',
+    count:4,
+    intro:'Proyectos de Social Media enfocados en posicionamiento y crecimiento de marca.',
+    projects:ph()
+  },
+  {
+    id:'branding',
+    title:'BRANDING',
+    folder:'branding',
+    type:'img',
+    count:5,
+    intro:'Construcción de identidades visuales estratégicas.',
+    projects:ph()
+  },
+  {
+    id:'audiovisual',
+    title:'AUDIOVISUAL',
+    folder:'audiovisual',
+    type:'video',
+    clips:3,
+    intro:'Producción de contenido audiovisual para marcas.',
+    projects:ph()
+  }
 ];
 (function(){
 const pad=n=>String(n).padStart(2,'0'),root=document.getElementById('portfolio');
