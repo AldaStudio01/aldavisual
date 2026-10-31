@@ -269,6 +269,7 @@ footer p{color:var(--mute);margin-top:.4rem}
    PORTFOLIO CONFIG
    - title / client / challenge / solution: textos de cada proyecto.
    - Imágenes: assets/<folder>/projectNN/imageNN.jpg
+   - dir (opcional, por proyecto): carpeta personalizada si no usa assets/<folder>/projectNN/
    - images (opcional, por proyecto): nombres de archivo dentro de la carpeta
      del proyecto, en el orden en que se muestran. Con extensión (ej. 1.SOCIAL.png)
      se usa tal cual; sin extensión, el sitio prueba jpg, jpeg, png y webp.
@@ -290,9 +291,9 @@ const PORTFOLIO = [
     intro:'Proyectos enfocados en posicionamiento y crecimiento de marca.',
     projects:[
       {title:'Contenido gastronómico',images:['../../../1.SOCIAL.png','../../../2.SOCIAL.png','../../../3.SOCIAL.png','../../../4.SOCIAL.png'],client:'Kaqík',challenge:'Posicionar un restaurante tradicional destacando platillos y novedades.',solution:'Sesión de fotos profesional y contenido alineado a la identidad de la marca.'},
-      {title:'Historias para redes',client:'Comercial Renoj S.A.',challenge:'Historias para redes visualmente atractivas bajo su línea gráfica.',solution:'Diseño limpio, estético y con la medida adecuada.'},
-      {title:'Publicaciones de productos',client:'Comercial Renoj S.A.',challenge:'Posts ofreciendo la variedad de productos manteniendo iconos de redes.',solution:'Plan estratégico mensual de publicaciones con diseño estético y profesional.'},
-      {title:'Campaña de independencia',client:'Panadería y pastelería Caprice',challenge:'Campaña visual para fechas de independencia respetando su línea gráfica.',solution:'Imagen atractiva con fotos llamativas, colores patrios y copy pegajoso.'}
+      {title:'Historias para redes',images:['1.RENOJ.png','2.RENOJ.png','3.RENOJ.png','4.RENOJ.png'],client:'Comercial Renoj S.A.',challenge:'Historias para redes visualmente atractivas bajo su línea gráfica.',solution:'Diseño limpio, estético y con la medida adecuada.'},
+      {title:'Publicaciones de productos',dir:'assets 03/social-media/project03/',images:['1.POSTY.jpg','2.POSTY.png','3.POSTY.png','4.POSTY.png'],client:'Comercial Renoj S.A.',challenge:'Posts ofreciendo la variedad de productos manteniendo iconos de redes.',solution:'Plan estratégico mensual de publicaciones con diseño estético y profesional.'},
+      {title:'Campaña de independencia',dir:'assets 04/social-media/project 04/',images:['1.CAPRICE.jpg','2.CAPRICE.jpg','3.CAPRICE.jpg','4.CAPRICE.jpg'],client:'Panadería y pastelería Caprice',challenge:'Campaña visual para fechas de independencia respetando su línea gráfica.',solution:'Imagen atractiva con fotos llamativas, colores patrios y copy pegajoso.'}
     ]
   },
   {
@@ -338,7 +339,7 @@ PORTFOLIO.forEach(c=>{
   const w=document.createElement('div');w.className='wrap';
   w.innerHTML=`<h2 class="pf-title r">${c.title}</h2><p class="pf-intro r">${c.intro}</p>`;
   c.projects.forEach((p,k)=>{
-    const dir=`assets/${c.folder}/project${pad(k+1)}/`,a=document.createElement('article');a.className='cs';
+    const dir=p.dir||`assets/${c.folder}/project${pad(k+1)}/`,a=document.createElement('article');a.className='cs';
     const h=document.createElement('div');h.className='cs-h r';
     h.innerHTML=`<div><span class="cs-n"></span><h3></h3></div><dl class="cs-d"><div><dt>Cliente</dt><dd class="cl"></dd></div><div><dt>Desafío</dt><dd class="ch"></dd></div><div><dt>Solución</dt><dd class="so"></dd></div></dl>`;
     h.querySelector('.cs-n').textContent='PROJECT '+pad(k+1);
