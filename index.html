@@ -260,10 +260,10 @@ footer p{color:var(--mute);margin-top:.4rem}
      nombre y ruta. Mientras no exista, se muestra un recuadro placeholder.
    - count: cantidad de imágenes por proyecto.
    ============================================================ */
-const ph=()=>Array.from({length:4},()=>({title:'SOCIAL MEDIA 001',desc:'Desafío: Posicionar un restaurante de comida tradicional en redes sociales, 
-    destacando sus platillos y novedades para atraer clientes. Solución: Se realizó una sesión fotográfica profesional y se desarrolló contenido
-    alineado con la identidad de la marca para fortalecer su presencia y posicionamiento en redes sociales.'}));
-const PORTFOLIO=[
+const ph = () => Array.from({ length: 4 }, () => ({
+  title: 'SOCIAL MEDIA 001',
+  desc: 'Desafío: Posicionar un restaurante de comida tradicional en redes sociales, destacando sus platillos y novedades para atraer clientes. Solución: Se realizó una sesión fotográfica profesional y se desarrolló contenido alineado con la identidad de la marca para fortalecer su presencia y posicionamiento en redes sociales.'
+}));
 {id:'social-media',title:'SOCIAL MEDIA',folder:'social-media',type:'img',count:4,intro:'Category introduction placeholder.',projects:ph()},
 {id:'branding',title:'BRANDING',folder:'branding',type:'img',count:5,intro:'Category introduction placeholder.',projects:ph()},
 {id:'audiovisual',title:'AUDIOVISUAL',folder:'audiovisual',type:'video',clips:3,intro:'Category introduction placeholder.',projects:ph()}
@@ -284,7 +284,7 @@ PORTFOLIO.forEach(c=>{
     const dir=`assets/${c.folder}/project${pad(k+1)}/`,a=document.createElement('article');a.className='cs';
     const h=document.createElement('div');h.className='cs-h r';
     h.innerHTML=`<span class="cs-n">${pad(k+1)}</span><h3></h3><p></p>`;
-    h.querySelector('h3').textContent=p.title;h.querySelector('p').textContent=p.desc;a.append(h);
+    h.querySelector('h3').textContent=p.title;h.querySelector('p').innerHTML = p.desc;a.append(h);
     if(c.type==='img'){for(let i=1;i<=c.count;i++)a.append(box(`${dir}image${pad(i)}.jpg`,'img',`${p.title} ${pad(i)}`))}
     else{
       const g=document.createElement('div');g.className='clips';
