@@ -136,6 +136,7 @@ nav.s{background:rgba(13,13,13,.78);backdrop-filter:blur(14px);border-color:var(
 .m-nat.ok span{display:none}
 .m-full-v{width:100%;max-width:420px;margin-inline:auto}
 .m video{object-fit:contain;background:#000}
+.m iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block;background:#000}
 @media(max-width:960px){.cs-h{grid-template-columns:1fr}.cs-d>div{grid-template-columns:6rem 1fr}}
 @media(max-width:720px){.clips{grid-template-columns:1fr}.clips-v{max-width:420px;margin-inline:auto}}
 /* contact */
@@ -269,6 +270,8 @@ footer p{color:var(--mute);margin-top:.4rem}
    PORTFOLIO CONFIG
    - title / client / challenge / solution: textos de cada proyecto.
    - Imágenes: assets/<folder>/projectNN/imageNN.jpg
+   - youtube (opcional, Audiovisual): {clips:['ID1','ID2','ID3'],full:'ID'} con el ID del video
+     (lo que va después de watch?v= , youtu.be/ o shorts/). Si falta, usa los .mp4 de assets/.
    - dir (opcional, por proyecto): carpeta personalizada si no usa assets/<folder>/projectNN/
    - images (opcional, por proyecto): nombres de archivo dentro de la carpeta
      del proyecto, en el orden en que se muestran. Con extensión (ej. 1.SOCIAL.png)
@@ -318,7 +321,7 @@ const PORTFOLIO = [
     clips:3,
     intro:'Producción de contenido audiovisual para marcas.',
     projects:[
-      {orientation:'vertical',title:'Video de variedad de productos',client:'Comercial Renoj S.A.',challenge:'Promocionar la variedad de productos para posicionamiento en redes.',solution:'Tomas de ubicación, voz en off y participación de personas para generar cercanía.'},
+      {orientation:'vertical',title:'Video de variedad de productos',youtube:{clips:['hiVy4PQGEeU','_zzkuofu6Ag','HJRMkW-kx28'],full:'J07CZfeTENw'},client:'Comercial Renoj S.A.',challenge:'Promocionar la variedad de productos para posicionamiento en redes.',solution:'Tomas de ubicación, voz en off y participación de personas para generar cercanía.'},
       {orientation:'vertical',title:'Video de marca',client:'Kaqík',challenge:'Dar a conocer productos, identidad y propuesta de valor.',solution:'Tomas dinámicas del personal, platillos y ubicación.'},
       {orientation:'vertical',title:'Video promocional',client:'Comercial Renoj S.A.',challenge:'Promocionar productos y conectar con el segmento de mercado.',solution:'Tomas del local, voz en off e integración de personas para mayor cercanía.'},
       {orientation:'horizontal',title:'Documental 24 aniversario',client:'Pastelería Caprice',challenge:'Documental corto por su 24 aniversario contando su trayectoria.',solution:'Documental cinematográfico casero, auténtico y cercano a las personas.'}
@@ -330,8 +333,9 @@ const pad=n=>String(n).padStart(2,'0'),root=document.getElementById('portfolio')
 const EXT=['jpg','jpeg','png','webp','JPG','JPEG','PNG','WEBP'];
 function box(path,kind,alt,cls){
   const d=document.createElement('div');d.className='m r'+(cls?' '+cls:'');
-  const l=document.createElement('span');l.textContent=[].concat(path)[0];d.append(l);
+  const l=document.createElement('span');l.textContent=kind==='yt'?'youtube.com/watch?v='+path:[].concat(path)[0];d.append(l);
   if(kind==='img'){const c=[].concat(path);let n=0;const i=new Image();i.alt=alt;i.loading='lazy';i.onload=()=>d.classList.add('ok');i.onerror=()=>{if(++n<c.length)i.src=c[n];else i.remove()};i.src=c[0];d.append(i)}
+  else if(kind==='yt'){const f=document.createElement('iframe');f.src=`https://www.youtube-nocookie.com/embed/${path}?rel=0&playsinline=1&modestbranding=1`;f.title=alt||'Video de ALDA VISUAL';f.loading='lazy';f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';f.allowFullscreen=true;f.referrerPolicy='strict-origin-when-cross-origin';d.append(f)}
   else{const v=document.createElement('video');v.controls=true;v.playsInline=true;v.preload='metadata';v.onerror=()=>v.remove();v.src=path;d.append(v)}
   return d}
 PORTFOLIO.forEach(c=>{
@@ -353,8 +357,9 @@ PORTFOLIO.forEach(c=>{
     else{
       const v=p.orientation==='vertical',oc=v?'m-v':'m-h';
       const g=document.createElement('div');g.className='clips '+(v?'clips-v':'clips-h');
-      for(let i=1;i<=c.clips;i++)g.append(box(`${dir}clip${pad(i)}.mp4`,'video','',oc));
-      a.append(g,box(`${dir}full-video.mp4`,'video','',v?oc+' m-full-v':oc));
+      const yt=p.youtube||{};
+      for(let i=1;i<=c.clips;i++)g.append(yt.clips&&yt.clips[i-1]?box(yt.clips[i-1],'yt',`${p.title} clip ${pad(i)}`,oc):box(`${dir}clip${pad(i)}.mp4`,'video','',oc));
+      a.append(g,yt.full?box(yt.full,'yt',`${p.title} video completo`,v?oc+' m-full-v':oc):box(`${dir}full-video.mp4`,'video','',v?oc+' m-full-v':oc));
     }
     w.append(a)});
   s.append(w);root.append(s)});
