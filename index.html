@@ -130,9 +130,10 @@ nav.s{background:rgba(13,13,13,.78);backdrop-filter:blur(14px);border-color:var(
 /* Videos: proporción original, sin recorte ni deformación */
 .m-v{aspect-ratio:9/16}
 .m-h{aspect-ratio:16/9}
+.m-full-v{width:100%;max-width:420px;margin-inline:auto}
 .m video{object-fit:contain;background:#000}
 @media(max-width:960px){.cs-h{grid-template-columns:1fr}.cs-d>div{grid-template-columns:6rem 1fr}}
-@media(max-width:720px){.clips{grid-template-columns:1fr;max-width:420px;margin-inline:auto}}
+@media(max-width:720px){.clips{grid-template-columns:1fr}.clips-v{max-width:420px;margin-inline:auto}}
 /* contact */
 .ct{background:var(--card);border:1px solid var(--line);border-radius:36px;padding:clamp(2rem,6vw,5rem);display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,5rem);position:relative;overflow:hidden}
 .ct::before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:var(--lime);filter:blur(130px);opacity:.14;right:-120px;top:-120px;pointer-events:none}
@@ -264,6 +265,7 @@ footer p{color:var(--mute);margin-top:.4rem}
    PORTFOLIO CONFIG
    - title / client / challenge / solution: textos de cada proyecto.
    - Imágenes: assets/<folder>/projectNN/imageNN.jpg
+   - orientation (solo Audiovisual): 'vertical' = 9:16, 'horizontal' = 16:9; aplica a los 3 clips y al video completo de ese proyecto.
    - Audiovisual: assets/audiovisual/projectNN/clip01.mp4 ... clip03.mp4
                   y assets/audiovisual/projectNN/full-video.mp4
    - Para reemplazar un medio: sube tu archivo a GitHub con ese mismo
@@ -307,10 +309,10 @@ const PORTFOLIO = [
     clips:3,
     intro:'Producción de contenido audiovisual para marcas.',
     projects:[
-      {title:'Video de variedad de productos',client:'Comercial Renoj S.A.',challenge:'Promocionar la variedad de productos para posicionamiento en redes.',solution:'Tomas de ubicación, voz en off y participación de personas para generar cercanía.'},
-      {title:'Video de marca',client:'Kaqík',challenge:'Dar a conocer productos, identidad y propuesta de valor.',solution:'Tomas dinámicas del personal, platillos y ubicación.'},
-      {title:'Video promocional',client:'Comercial Renoj S.A.',challenge:'Promocionar productos y conectar con el segmento de mercado.',solution:'Tomas del local, voz en off e integración de personas para mayor cercanía.'},
-      {title:'Documental 24 aniversario',client:'Pastelería Caprice',challenge:'Documental corto por su 24 aniversario contando su trayectoria.',solution:'Documental cinematográfico casero, auténtico y cercano a las personas.'}
+      {orientation:'vertical',title:'Video de variedad de productos',client:'Comercial Renoj S.A.',challenge:'Promocionar la variedad de productos para posicionamiento en redes.',solution:'Tomas de ubicación, voz en off y participación de personas para generar cercanía.'},
+      {orientation:'vertical',title:'Video de marca',client:'Kaqík',challenge:'Dar a conocer productos, identidad y propuesta de valor.',solution:'Tomas dinámicas del personal, platillos y ubicación.'},
+      {orientation:'vertical',title:'Video promocional',client:'Comercial Renoj S.A.',challenge:'Promocionar productos y conectar con el segmento de mercado.',solution:'Tomas del local, voz en off e integración de personas para mayor cercanía.'},
+      {orientation:'horizontal',title:'Documental 24 aniversario',client:'Pastelería Caprice',challenge:'Documental corto por su 24 aniversario contando su trayectoria.',solution:'Documental cinematográfico casero, auténtico y cercano a las personas.'}
     ]
   }
 ];
@@ -338,9 +340,10 @@ PORTFOLIO.forEach(c=>{
     a.append(h);
     if(c.type==='img'){for(let i=1;i<=c.count;i++)a.append(box(`${dir}image${pad(i)}.jpg`,'img',`${p.title} ${pad(i)}`))}
     else{
-      const g=document.createElement('div');g.className='clips';
-      for(let i=1;i<=c.clips;i++)g.append(box(`${dir}clip${pad(i)}.mp4`,'video','','m-v'));
-      a.append(g,box(`${dir}full-video.mp4`,'video','','m-h'));
+      const v=p.orientation==='vertical',oc=v?'m-v':'m-h';
+      const g=document.createElement('div');g.className='clips '+(v?'clips-v':'clips-h');
+      for(let i=1;i<=c.clips;i++)g.append(box(`${dir}clip${pad(i)}.mp4`,'video','',oc));
+      a.append(g,box(`${dir}full-video.mp4`,'video','',v?oc+' m-full-v':oc));
     }
     w.append(a)});
   s.append(w);root.append(s)});
