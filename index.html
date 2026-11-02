@@ -307,10 +307,10 @@ const PORTFOLIO = [
     count:4,
     intro:'Construcción de identidades visuales estratégicas.',
     projects:[
-      {title:'Identidad corporativa',client:'Cooperativa Coopeapoyo',challenge:'Crear la imagen corporativa para representar sus valores e identidad.',solution:'Estudio de competencia y segmento para lograr una imagen estética y funcional.'},
-      {title:'Identidad de carnicería',client:'El Novillero',challenge:'Identidad visual para carnicería cumpliendo nombre y símbolo solicitados.',solution:'Imagen con estilo, cercana, real y funcional.'},
-      {title:'Imagen para bufete',client:'Saquic Álvarez y asociados',challenge:'Imagen para bufete de abogados que transmita profesionalismo.',solution:'Marca diferenciada, limpia, memorable y adaptable a las solicitudes.'},
-      {title:'Marca personal',client:'José De León',challenge:'Imagen para comunicador social que refleje su identidad profesional y humana.',solution:'Investigación de mercado para definir colores y formas auténticas.'}
+      {title:'Identidad corporativa',dir:'assets B1/Branding/Project 01/',images:['B1.jpg','B2.jpg','B3.jpg','B4.mp4'],client:'Cooperativa Coopeapoyo',challenge:'Crear la imagen corporativa para representar sus valores e identidad.',solution:'Estudio de competencia y segmento para lograr una imagen estética y funcional.'},
+      {title:'Identidad de carnicería',dir:'assets B2/Branding/Project 02/',images:['NOV1.jpg','NOV2.jpg','NOV3.jpg','NOV4.jpg'],client:'El Novillero',challenge:'Identidad visual para carnicería cumpliendo nombre y símbolo solicitados.',solution:'Imagen con estilo, cercana, real y funcional.'},
+      {title:'Imagen para bufete',dir:'assets B3/Branding/Project 03/',images:['SAC1.jpg','SAC2.jpg','SAC3.jpg','SAC4.jpg'],client:'Saquic Álvarez y asociados',challenge:'Imagen para bufete de abogados que transmita profesionalismo.',solution:'Marca diferenciada, limpia, memorable y adaptable a las solicitudes.'},
+      {title:'Marca personal',dir:'assets B4/Branding/Project 04/',images:['JOS1.jpg','JOS2.jpg','JOS3.jpg','JOS4.jpg'],client:'José De León',challenge:'Imagen para comunicador social que refleje su identidad profesional y humana.',solution:'Investigación de mercado para definir colores y formas auténticas.'}
     ]
   },
   {
@@ -352,7 +352,7 @@ PORTFOLIO.forEach(c=>{
     h.querySelector('.ch').textContent=p.challenge;
     h.querySelector('.so').textContent=p.solution;
     a.append(h);
-    if(c.type==='img'&&p.images){p.images.forEach((nm,j)=>a.append(box(/\.(png|jpe?g|webp)$/i.test(nm)?`${dir}${nm}`:EXT.map(e=>`${dir}${nm}.${e}`),'img',`${p.title} ${pad(j+1)}`,'m-nat')))}
+    if(c.type==='img'&&p.images){p.images.forEach((nm,j)=>a.append(/\.mp4$/i.test(nm)?box(`${dir}${nm}`,'video','','m-h'):box(/\.(png|jpe?g|webp)$/i.test(nm)?`${dir}${nm}`:EXT.map(e=>`${dir}${nm}.${e}`),'img',`${p.title} ${pad(j+1)}`,'m-nat')))}
     else if(c.type==='img'){for(let i=1;i<=c.count;i++)a.append(box(`${dir}image${pad(i)}.jpg`,'img',`${p.title} ${pad(i)}`))}
     else{
       const v=p.orientation==='vertical',oc=v?'m-v':'m-h';
