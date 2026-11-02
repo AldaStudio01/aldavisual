@@ -253,7 +253,7 @@ footer p{color:var(--mute);margin-top:.4rem}
 <section id="contacto" style="padding-top:0"><div class="wrap"><div class="ct r">
 <div><h2>Hablemos de tu próximo proyecto</h2><p>Cuéntame qué quieres lograr con tu marca y te respondo con una propuesta clara.</p>
 <div class="cta">
-<a class="btn p" id="wa" href="https://wa.me/50249993744?text=Hola%20Aldair%2C%20quiero%20hablar%20de%20un%20proyecto" target="_blank" rel="noopener">WhatsApp</a>
+<a class="btn p" href="mailto:aldadesing44@gmail.com?subject=Quiero%20hablar%20de%20un%20proyecto">Correo</a>
 <a class="btn" href="https://instagram.com/aldair_cua" target="_blank" rel="noopener">Instagram</a> 
 </div></div>
 <form id="form" novalidate>
@@ -383,13 +383,20 @@ addEventListener('mousemove',e=>{const x=e.clientX/innerWidth-.5,y=e.clientY/inn
 // glow en tarjetas
 document.querySelectorAll('.card').forEach(c=>c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--x',(e.clientX-r.left)+'px');c.style.setProperty('--y',(e.clientY-r.top)+'px')}));
 // formulario: abre el correo del usuario con los datos (GitHub Pages es estático)
-const EMAIL='correo@tudominio.com';
-document.getElementById('form').addEventListener('submit',e=>{e.preventDefault();
-const f=e.target,ok=document.getElementById('ok');
+// Los mensajes del formulario llegan a este correo mediante FormSubmit (gratis).
+// La primera vez hay que enviar un mensaje de prueba y confirmar el correo de activación.
+const EMAIL='aldadesing44@gmail.com';
+document.getElementById('form').addEventListener('submit',async e=>{e.preventDefault();
+const f=e.target,ok=document.getElementById('ok'),b=f.querySelector('button');
 if(!f.nombre.value.trim()||!/^\S+@\S+\.\S+$/.test(f.correo.value)||!f.mensaje.value.trim()){ok.style.color='#ff8a7a';ok.textContent='Completa tu nombre, un correo válido y tu mensaje.';return}
-ok.style.color='';ok.textContent='Abriendo tu aplicación de correo…';
-location.href='mailto:'+EMAIL+'?subject='+encodeURIComponent('Proyecto: '+f.nombre.value)+'&body='+encodeURIComponent(f.mensaje.value+'\n\n'+f.nombre.value+' · '+f.correo.value);
-});
+ok.style.color='';ok.textContent='Enviando…';b.disabled=true;
+try{
+const r=await fetch('https://formsubmit.co/ajax/'+EMAIL,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({nombre:f.nombre.value,email:f.correo.value,mensaje:f.mensaje.value,_subject:'Nuevo mensaje desde ALDA VISUAL: '+f.nombre.value,_template:'table',_captcha:'false'})});
+const d=await r.json().catch(()=>({}));
+if(!r.ok||d.success===false||d.success==='false')throw 0;
+f.reset();ok.textContent='¡Mensaje enviado! Te responderé pronto.';
+}catch(_){ok.style.color='#ff8a7a';ok.textContent='No se pudo enviar. Escríbeme directamente a '+EMAIL+'.'}
+b.disabled=false});
 </script>
 </body>
 </html>
