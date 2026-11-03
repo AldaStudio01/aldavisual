@@ -229,10 +229,7 @@ footer p{color:var(--mute);margin-top:.4rem}
 </div>
 </div></section>
 
-</div>
-
-<div class="view" data-view="proceso">
-<section id="proceso" style="padding-top:clamp(7rem,12vw,9rem)"><div class="wrap">
+<section id="proceso" style="padding-top:0"><div class="wrap">
 <div class="head r"><h2>Cómo trabajo</h2><p>Un camino claro, de entender tu marca a medir lo que logra.</p></div>
 <div class="steps r" id="steps"><span class="fill"></span>
 <div class="st"><em>1</em><h3>Investigación</h3><p>Analizo tu negocio, tu público y tu competencia para partir de datos, no de suposiciones.</p></div>
@@ -240,6 +237,19 @@ footer p{color:var(--mute);margin-top:.4rem}
 <div class="st"><em>3</em><h3>Diseño</h3><p>Doy forma a la estrategia con identidad, contenido y producción de nivel profesional.</p></div>
 <div class="st"><em>4</em><h3>Resultados</h3><p>Medimos, ajustamos y consolidamos una marca que crece con propósito.</p></div>
 </div></div></section>
+
+<section id="contacto" style="padding-top:0"><div class="wrap"><div class="ct r">
+<div><h2>Hablemos de tu próximo proyecto</h2><p>Cuéntame qué quieres lograr con tu marca y te respondo con una propuesta clara.</p>
+<div class="cta">
+<a class="btn p" href="https://mail.google.com/mail/?view=cm&fs=1&to=aldadesing44@gmail.com&su=Quiero%20hablar%20de%20un%20proyecto" target="_blank" rel="noopener">Correo</a>
+<a class="btn" href="https://instagram.com/aldair_cua" target="_blank" rel="noopener">Instagram</a> 
+</div></div>
+<form id="form" novalidate>
+<div class="f"><input id="n" name="nombre" placeholder=" " required autocomplete="name"><label for="n">Nombre</label></div>
+<div class="f"><input id="c" name="correo" type="email" placeholder=" " required autocomplete="email"><label for="c">Correo</label></div>
+<div class="f"><textarea id="m" name="mensaje" rows="4" placeholder=" " required></textarea><label for="m">Mensaje</label></div>
+<button class="btn p" type="submit">Enviar mensaje</button><p id="ok" role="status"></p>
+</form></div></div></section>
 
 </div>
 
@@ -254,21 +264,6 @@ footer p{color:var(--mute);margin-top:.4rem}
 
 
 
-<div class="view" data-view="contacto">
-<section id="contacto" style="padding-top:clamp(7rem,12vw,9rem)"><div class="wrap"><div class="ct r">
-<div><h2>Hablemos de tu próximo proyecto</h2><p>Cuéntame qué quieres lograr con tu marca y te respondo con una propuesta clara.</p>
-<div class="cta">
-<a class="btn p" href="https://mail.google.com/mail/?view=cm&fs=1&to=aldadesing44@gmail.com&su=Quiero%20hablar%20de%20un%20proyecto" target="_blank" rel="noopener">Correo</a>
-<a class="btn" href="https://instagram.com/aldair_cua" target="_blank" rel="noopener">Instagram</a> 
-</div></div>
-<form id="form" novalidate>
-<div class="f"><input id="n" name="nombre" placeholder=" " required autocomplete="name"><label for="n">Nombre</label></div>
-<div class="f"><input id="c" name="correo" type="email" placeholder=" " required autocomplete="email"><label for="c">Correo</label></div>
-<div class="f"><textarea id="m" name="mensaje" rows="4" placeholder=" " required></textarea><label for="m">Mensaje</label></div>
-<button class="btn p" type="submit">Enviar mensaje</button><p id="ok" role="status"></p>
-</form></div></div></section>
-
-</div>
 </main>
 
 <footer><div class="wrap"><b>ALDA VISUAL</b><p>Social Media • Branding • Audiovisual</p><p style="margin-top:1.5rem;font-size:.9rem">© 2026</p></div></footer>
@@ -406,19 +401,21 @@ f.reset();ok.textContent='¡Mensaje enviado! Te responderé pronto.';
 }catch(_){ok.style.color='#ff8a7a';ok.textContent='No se pudo enviar. Escríbeme directamente a '+EMAIL+'.'}
 b.disabled=false});
 // ===== NAVEGACIÓN POR PÁGINAS (vistas) =====
-// #/ = inicio | #/sobre-mi = inicio, bajando a Sobre mí | #/proceso | #/contacto | #/social-media | #/branding | #/audiovisual
-// #/portafolio = inicio, bajando a las especialidades | #/social-media/01 = esa página, bajando al proyecto 01
+// Inicio contiene: Sobre mí, Especialidades, Proyectos, Proceso y Contacto (#/sobre-mi, #/portafolio, #/proceso, #/contacto bajan a cada sección)
+// Páginas aparte: #/social-media | #/branding | #/audiovisual (y #/social-media/01 baja al proyecto 01)
 const VIEWS=[...document.querySelectorAll('.view')],NAVA=[...document.querySelectorAll('.links a[data-v]')];
-const ALIAS={'':'inicio',inicio:'inicio','sobre-mi':'inicio',portafolio:'inicio',especialidades:'inicio',proyectos:'inicio'};
-const ANCH={'sobre-mi':'sobre-mi',portafolio:'especialidades',especialidades:'especialidades',proyectos:'proyectos'};
+const ALIAS={'':'inicio',inicio:'inicio','sobre-mi':'inicio',portafolio:'inicio',especialidades:'inicio',proyectos:'inicio',proceso:'inicio',contacto:'inicio'};
+const ANCH={'sobre-mi':'sobre-mi',portafolio:'especialidades',especialidades:'especialidades',proyectos:'proyectos',proceso:'proceso',contacto:'contacto'};
 function route(){
 const [v='',sub]=location.hash.replace(/^#\/?/,'').split('/');
 let name=ALIAS[v]||v;if(!VIEWS.some(x=>x.dataset.view===name))name='inicio';
+const same=VIEWS.some(x=>x.classList.contains('on')&&x.dataset.view===name);
 VIEWS.forEach(x=>x.classList.toggle('on',x.dataset.view===name));
 NAVA.forEach(a=>a.classList.toggle('act',a.dataset.v===v));
 const t=document.getElementById(sub?name+'-'+sub:(ANCH[v]||''));
-scrollTo({top:0,behavior:'instant'});
-if(t)setTimeout(()=>t.scrollIntoView({behavior:'smooth'}),150);
+if(!same)scrollTo({top:0,behavior:'instant'});
+if(t){if(same)t.scrollIntoView({behavior:'smooth'});else setTimeout(()=>t.scrollIntoView({behavior:'instant'}),60)}
+else if(same)scrollTo({top:0,behavior:'smooth'});
 }
 addEventListener('hashchange',route);route();
 </script>
