@@ -81,21 +81,10 @@ nav.s{background:rgba(13,13,13,.78);backdrop-filter:blur(14px);border-color:var(
 .card:hover .ic{transform:rotate(-8deg) scale(1.15)}
 .card h3{font-size:2rem;font-weight:800;margin-bottom:.9rem}
 .card p{color:var(--mute)}
-/* projects */
-.pg{display:grid;grid-template-columns:repeat(6,1fr);gap:1.25rem}
-.pj{grid-column:span 2;position:relative;aspect-ratio:4/5;border-radius:24px;overflow:hidden;background:var(--card);border:1px solid var(--line);display:flex;align-items:flex-end;padding:1.8rem;isolation:isolate}
-.pj:nth-child(1),.pj:nth-child(4){grid-column:span 3;aspect-ratio:16/11}
-.pj:nth-child(5),.pj:nth-child(6){grid-column:span 3;aspect-ratio:16/11}
-.pj .art{position:absolute;inset:0;z-index:-1;transition:transform 1s var(--e);background:var(--bgf)}
-.pj:hover .art{transform:scale(1.1) rotate(1.5deg)}
-.pj .art::after{content:attr(data-l);position:absolute;right:-1rem;top:-.5rem;font-family:var(--d);font-weight:800;font-size:clamp(6rem,14vw,12rem);letter-spacing:-.06em;color:rgba(255,255,255,.07);line-height:1}
-.pj::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(transparent 35%,rgba(13,13,13,.9))}
-.pj h3{font-size:clamp(1.5rem,2.6vw,2.2rem);font-weight:800}
-.pj ul{list-style:none;display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.8rem}
-.pj li{font-size:.82rem;border:1px solid rgba(255,255,255,.25);border-radius:99px;padding:.2rem .75rem;backdrop-filter:blur(6px);background:rgba(13,13,13,.35);transition:.4s}
-.pj:hover li{background:var(--lime);color:#0D0D0D;border-color:var(--lime)}
-.pj .go{position:absolute;right:1.4rem;top:1.4rem;width:48px;height:48px;border-radius:50%;background:var(--lime);color:#0D0D0D;display:grid;place-items:center;transform:scale(0) rotate(-90deg);transition:transform .5s var(--e)}
-.pj:hover .go{transform:none}
+/* projects (botones) */
+.pbtns{display:flex;flex-wrap:wrap;gap:.9rem}
+.pbtn{font-family:var(--d);font-weight:800;font-size:clamp(1rem,2vw,1.3rem);letter-spacing:-.01em;padding:1rem 1.9rem}
+.pbtn:hover{background:var(--lime);color:#0D0D0D;border-color:var(--lime)}
 /* process */
 .steps{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;padding-top:3rem}
 .steps::before,.steps .fill{content:"";position:absolute;top:0;left:0;height:2px;width:100%;background:var(--line)}
@@ -162,13 +151,11 @@ footer p{color:var(--mute);margin-top:.4rem}
 .cards,.tg{grid-template-columns:1fr}.card{min-height:300px}
 .about,.ct{grid-template-columns:1fr}
 .steps{grid-template-columns:1fr 1fr;row-gap:4rem}
-.pj,.pj:nth-child(n){grid-column:span 3;aspect-ratio:4/3}
 }
 @media(max-width:720px){
 .burger{display:block}
 .links{position:fixed;inset:72px 0 auto;flex-direction:column;background:rgba(13,13,13,.97);padding:2rem;gap:1.6rem;font-size:1.3rem;transform:translateY(-130%);transition:transform .5s var(--e);border-bottom:1px solid var(--line)}
 .links.o{transform:none}
-.pg{grid-template-columns:1fr}.pj,.pj:nth-child(n){grid-column:auto;aspect-ratio:4/3.4}
 .steps{grid-template-columns:1fr;padding:0 0 0 2rem;gap:2.8rem}
 .steps::before,.steps .fill{width:2px;height:100%;left:0}
 .steps .fill{height:0;transition:height 2s var(--e)}.steps.v .fill{height:100%;width:2px}
@@ -223,14 +210,15 @@ footer p{color:var(--mute);margin-top:.4rem}
 
 <section id="proyectos" style="padding-top:0"><div class="wrap">
 <div class="head r"><h2>Proyectos destacados</h2><p>Marcas que confiaron en una mirada estratégica para crecer.</p></div>
-<div class="pg">
-<article class="pj r"><div class="art" data-l="K" style="--bgf:radial-gradient(circle at 25% 20%,#d6ff3a 0,transparent 45%),linear-gradient(135deg,#2a3a05,#0f0f0f)"></div><span class="go">↗</span><div><h3>KAQIK</h3><ul><li>Social Media</li><li>Fotografía gastronómica</li><li>Contenido para redes sociales</li></ul></div></article>
-<article class="pj r"><div class="art" data-l="R" style="--bgf:radial-gradient(circle at 80% 15%,#C3F11A 0,transparent 40%),linear-gradient(200deg,#1d1d1d,#0b0b0b)"></div><span class="go">↗</span><div><h3>COMERCIAL RENOJ</h3><ul><li>Social Media</li><li>Campañas digitales</li><li>Historias y publicaciones</li></ul></div></article>
-<article class="pj r"><div class="art" data-l="C" style="--bgf:radial-gradient(circle at 20% 80%,#9fd10f 0,transparent 50%),linear-gradient(160deg,#242424,#0d0d0d)"></div><span class="go">↗</span><div><h3>CAPRICE</h3><ul><li>Campañas promocionales</li><li>Social Media</li></ul></div></article>
-<article class="pj r"><div class="art" data-l="CP" style="--bgf:conic-gradient(from 210deg at 70% 30%,#0f0f0f,#3b5a05,#C3F11A 40%,#0f0f0f 60%)"></div><span class="go">↗</span><div><h3>COOPEAPOYO</h3><ul><li>Branding</li><li>Identidad corporativa</li></ul></div></article>
-<article class="pj r"><div class="art" data-l="N" style="--bgf:radial-gradient(circle at 60% 60%,#7aa80d 0,transparent 50%),linear-gradient(20deg,#101010,#262626)"></div><span class="go">↗</span><div><h3>EL NOVILLERO</h3><ul><li>Branding</li><li>Diseño de marca</li></ul></div></article>
-<article class="pj r"><div class="art" data-l="JL" style="--bgf:radial-gradient(circle at 15% 20%,#e4ff6b 0,transparent 38%),linear-gradient(120deg,#1b2605,#0d0d0d)"></div><span class="go">↗</span><div><h3>JOSÉ DE LEÓN</h3><ul><li>Branding personal</li></ul></div></article>
-</div></div></section>
+<div class="pbtns">
+<a class="btn pbtn r" href="#social-media-01">KAQIK</a>
+<a class="btn pbtn r" href="#social-media-02">COMERCIAL RENOJ</a>
+<a class="btn pbtn r" href="#social-media-04">CAPRICE</a>
+<a class="btn pbtn r" href="#branding-01">COOPEAPOYO</a>
+<a class="btn pbtn r" href="#branding-02">EL NOVILLERO</a>
+<a class="btn pbtn r" href="#branding-04">JOSÉ DE LEÓN</a>
+</div>
+</div></section>
 
 <section id="proceso" style="padding-top:0"><div class="wrap">
 <div class="head r"><h2>Cómo trabajo</h2><p>Un camino claro, de entender tu marca a medir lo que logra.</p></div>
@@ -253,7 +241,7 @@ footer p{color:var(--mute);margin-top:.4rem}
 <section id="contacto" style="padding-top:0"><div class="wrap"><div class="ct r">
 <div><h2>Hablemos de tu próximo proyecto</h2><p>Cuéntame qué quieres lograr con tu marca y te respondo con una propuesta clara.</p>
 <div class="cta">
-<a class="btn p" href="mailto:aldadesing44@gmail.com?subject=Quiero%20hablar%20de%20un%20proyecto">Correo</a>
+<a class="btn p" href="https://mail.google.com/mail/?view=cm&fs=1&to=aldadesing44@gmail.com&su=Quiero%20hablar%20de%20un%20proyecto" target="_blank" rel="noopener">Correo</a>
 <a class="btn" href="https://instagram.com/aldair_cua" target="_blank" rel="noopener">Instagram</a> 
 </div></div>
 <form id="form" novalidate>
@@ -346,7 +334,7 @@ PORTFOLIO.forEach(c=>{
   const w=document.createElement('div');w.className='wrap';
   w.innerHTML=`<h2 class="pf-title r">${c.title}</h2><p class="pf-intro r">${c.intro}</p>`;
   c.projects.forEach((p,k)=>{
-    const dir=p.dir||`assets/${c.folder}/project${pad(k+1)}/`,a=document.createElement('article');a.className='cs';
+    const dir=p.dir||`assets/${c.folder}/project${pad(k+1)}/`,a=document.createElement('article');a.className='cs';a.id=c.id+'-'+pad(k+1);
     const h=document.createElement('div');h.className='cs-h r';
     h.innerHTML=`<div><span class="cs-n"></span><h3></h3></div><dl class="cs-d"><div><dt>Cliente</dt><dd class="cl"></dd></div><div><dt>Desafío</dt><dd class="ch"></dd></div><div><dt>Solución</dt><dd class="so"></dd></div></dl>`;
     h.querySelector('.cs-n').textContent='PROJECT '+pad(k+1);
