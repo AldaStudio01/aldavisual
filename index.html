@@ -81,6 +81,13 @@ nav.s{background:rgba(13,13,13,.78);backdrop-filter:blur(14px);border-color:var(
 .card:hover .ic{transform:rotate(-8deg) scale(1.15)}
 .card h3{font-size:2rem;font-weight:800;margin-bottom:.9rem}
 .card p{color:var(--mute)}
+/* vistas (páginas) */
+.view{display:none}
+.view.on{display:block;animation:vin .8s var(--e)}
+@keyframes vin{from{opacity:0;transform:translateY(24px)}}
+.back{margin-bottom:clamp(2rem,5vw,3.5rem)}
+.back-b{margin:clamp(3rem,7vw,5rem) 0 0}
+.links a.act:not(.btn){color:var(--w)}
 /* projects (botones) */
 .pbtns{display:flex;flex-wrap:wrap;gap:.9rem}
 .pbtn{font-family:var(--d);font-weight:800;font-size:clamp(1rem,2vw,1.3rem);letter-spacing:-.01em;padding:1rem 1.9rem}
@@ -166,21 +173,23 @@ footer p{color:var(--mute);margin-top:.4rem}
 </head>
 <body>
 <nav id="nav"><div class="wrap nav">
-<a href="#inicio" class="logo">
+<a href="#/" class="logo">
     <img src="LOGO.png" alt="ALDA VISUAL" style="height:30px; width:auto;">
 </a> 
 <button class="burger" id="bg" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span></button>
 <div class="links" id="lk">
-<a href="#sobre-mi">Sobre mí</a><a href="#especialidades">Especialidades</a><a href="#proyectos">Proyectos</a><a href="#proceso">Proceso</a>
-<a href="#contacto" class="btn p" style="padding:.6rem 1.3rem">Contactar</a>
+<a href="#/sobre-mi" data-v="sobre-mi">Sobre mí</a><a href="#/portafolio" data-v="portafolio">Portafolio</a><a href="#/proceso" data-v="proceso">Proceso</a>
+<a href="#/contacto" data-v="contacto" class="btn p" style="padding:.6rem 1.3rem">Contactar</a>
 </div></div></nav>
 
+<main>
+<div class="view" data-view="inicio">
 <header class="hero" id="inicio">
 <div class="bg"><div class="grid"></div><div class="orb o1" data-p="40"></div><div class="orb o2" data-p="-30"></div></div>
 <div class="wrap">
 <h1><span class="ln"><span>Diseño con propósito.</span></span><span class="ln"><span>Marcas con resultados.</span></span></h1>
 <p>Ayudo a empresas y marcas personales a posicionarse a través de Social Media, Branding y Producción Audiovisual.</p>
-<div class="cta"><a href="#proyectos" class="btn p">Ver proyectos</a><a href="#contacto" class="btn">Contactar</a></div>
+<div class="cta"><a href="#/portafolio" class="btn p">Ver proyectos</a><a href="#/contacto" class="btn">Contactar</a></div>
 </div>
 </header>
 
@@ -197,30 +206,33 @@ footer p{color:var(--mute);margin-top:.4rem}
 <p>Soy Aldair Cuá, creador de ALDA VISUAL. Me especializo en Social Media, Branding y Producción Audiovisual porque la verdadera excelencia proviene del enfoque.</p>
 <q>Mi trabajo no consiste solo en diseñar algo atractivo, sino en crear con propósito, estrategia y resultados.</q>
 <p>Quien intenta abarcar todo termina dominando poco. Al concentrarme en tres áreas que se complementan, cada proyecto recibe criterio, oficio y estrategia, y tu marca se posiciona en el mercado y conecta con lo que sus clientes realmente necesitan.</p>
-<a href="#contacto" class="btn" style="margin-top:1rem">Trabajemos juntos</a>
+<a href="#/contacto" class="btn" style="margin-top:1rem">Trabajemos juntos</a>
 </div></div></section>
 
 <section id="especialidades" style="padding-top:0"><div class="wrap">
 <div class="head r"><h2>Lo que hago mejor</h2><p>Tres especialidades que trabajan juntas para que tu marca se vea, suene y se sienta coherente.</p></div>
 <div class="cards">
-<a class="card r" href="#social-media" aria-label="Ver portafolio de Social Media"><svg class="ic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="6" width="32" height="52" rx="7"/><path d="M28 50h8"/><circle cx="32" cy="26" r="7"/><path d="M32 19v-6M39 26h6"/></svg><div><h3>Social Media</h3><p>Creación de contenido estratégico para posicionar marcas y generar conexión con clientes.</p></div></a>
-<a class="card r" href="#branding" aria-label="Ver portafolio de Branding"><svg class="ic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6l7 14 15 2-11 11 3 15-14-8-14 8 3-15L10 22l15-2z"/><path d="M32 58V46"/></svg><div><h3>Branding</h3><p>Construcción de identidades visuales memorables, funcionales y diferenciadoras.</p></div></a>
-<a class="card r" href="#audiovisual" aria-label="Ver portafolio de Audiovisual"><svg class="ic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="14" width="38" height="36" rx="7"/><path d="M44 28l14-8v24l-14-8z"/><circle cx="25" cy="32" r="6"/></svg><div><h3>Audiovisual</h3><p>Producción de contenido visual atractivo que comunica y conecta.</p></div></a>
+<a class="card r" href="#/social-media" aria-label="Ver portafolio de Social Media"><svg class="ic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="16" y="6" width="32" height="52" rx="7"/><path d="M28 50h8"/><circle cx="32" cy="26" r="7"/><path d="M32 19v-6M39 26h6"/></svg><div><h3>Social Media</h3><p>Creación de contenido estratégico para posicionar marcas y generar conexión con clientes.</p></div></a>
+<a class="card r" href="#/branding" aria-label="Ver portafolio de Branding"><svg class="ic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6l7 14 15 2-11 11 3 15-14-8-14 8 3-15L10 22l15-2z"/><path d="M32 58V46"/></svg><div><h3>Branding</h3><p>Construcción de identidades visuales memorables, funcionales y diferenciadoras.</p></div></a>
+<a class="card r" href="#/audiovisual" aria-label="Ver portafolio de Audiovisual"><svg class="ic" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="14" width="38" height="36" rx="7"/><path d="M44 28l14-8v24l-14-8z"/><circle cx="25" cy="32" r="6"/></svg><div><h3>Audiovisual</h3><p>Producción de contenido visual atractivo que comunica y conecta.</p></div></a>
 </div></div></section>
 
 <section id="proyectos" style="padding-top:0"><div class="wrap">
 <div class="head r"><h2>Proyectos destacados</h2><p>Marcas que confiaron en una mirada estratégica para crecer.</p></div>
 <div class="pbtns">
-<a class="btn pbtn r" href="#social-media-01">KAQIK</a>
-<a class="btn pbtn r" href="#social-media-02">COMERCIAL RENOJ</a>
-<a class="btn pbtn r" href="#social-media-04">CAPRICE</a>
-<a class="btn pbtn r" href="#branding-01">COOPEAPOYO</a>
-<a class="btn pbtn r" href="#branding-02">EL NOVILLERO</a>
-<a class="btn pbtn r" href="#branding-04">JOSÉ DE LEÓN</a>
+<a class="btn pbtn r" href="#/social-media/01">KAQIK</a>
+<a class="btn pbtn r" href="#/social-media/02">COMERCIAL RENOJ</a>
+<a class="btn pbtn r" href="#/social-media/04">CAPRICE</a>
+<a class="btn pbtn r" href="#/branding/01">COOPEAPOYO</a>
+<a class="btn pbtn r" href="#/branding/02">EL NOVILLERO</a>
+<a class="btn pbtn r" href="#/branding/04">JOSÉ DE LEÓN</a>
 </div>
 </div></section>
 
-<section id="proceso" style="padding-top:0"><div class="wrap">
+</div>
+
+<div class="view" data-view="proceso">
+<section id="proceso" style="padding-top:clamp(7rem,12vw,9rem)"><div class="wrap">
 <div class="head r"><h2>Cómo trabajo</h2><p>Un camino claro, de entender tu marca a medir lo que logra.</p></div>
 <div class="steps r" id="steps"><span class="fill"></span>
 <div class="st"><em>1</em><h3>Investigación</h3><p>Analizo tu negocio, tu público y tu competencia para partir de datos, no de suposiciones.</p></div>
@@ -228,6 +240,8 @@ footer p{color:var(--mute);margin-top:.4rem}
 <div class="st"><em>3</em><h3>Diseño</h3><p>Doy forma a la estrategia con identidad, contenido y producción de nivel profesional.</p></div>
 <div class="st"><em>4</em><h3>Resultados</h3><p>Medimos, ajustamos y consolidamos una marca que crece con propósito.</p></div>
 </div></div></section>
+
+</div>
 
 <!-- ============================================================
      PORTFOLIOS (Social Media / Branding / Audiovisual)
@@ -238,7 +252,10 @@ footer p{color:var(--mute);margin-top:.4rem}
      ============================================================ -->
 <div id="portfolio"></div>
 
-<section id="contacto" style="padding-top:0"><div class="wrap"><div class="ct r">
+
+
+<div class="view" data-view="contacto">
+<section id="contacto" style="padding-top:clamp(7rem,12vw,9rem)"><div class="wrap"><div class="ct r">
 <div><h2>Hablemos de tu próximo proyecto</h2><p>Cuéntame qué quieres lograr con tu marca y te respondo con una propuesta clara.</p>
 <div class="cta">
 <a class="btn p" href="https://mail.google.com/mail/?view=cm&fs=1&to=aldadesing44@gmail.com&su=Quiero%20hablar%20de%20un%20proyecto" target="_blank" rel="noopener">Correo</a>
@@ -250,6 +267,9 @@ footer p{color:var(--mute);margin-top:.4rem}
 <div class="f"><textarea id="m" name="mensaje" rows="4" placeholder=" " required></textarea><label for="m">Mensaje</label></div>
 <button class="btn p" type="submit">Enviar mensaje</button><p id="ok" role="status"></p>
 </form></div></div></section>
+
+</div>
+</main>
 
 <footer><div class="wrap"><b>ALDA VISUAL</b><p>Social Media • Branding • Audiovisual</p><p style="margin-top:1.5rem;font-size:.9rem">© 2026</p></div></footer>
 
@@ -330,9 +350,9 @@ function box(path,kind,alt,cls){
   else{const v=document.createElement('video');v.controls=true;v.playsInline=true;v.preload='metadata';v.onerror=()=>v.remove();v.src=path;d.append(v)}
   return d}
 PORTFOLIO.forEach(c=>{
-  const s=document.createElement('section');s.id=c.id;s.className='pf';
+  const s=document.createElement('section');s.id=c.id;s.className='pf view';s.dataset.view=c.id;
   const w=document.createElement('div');w.className='wrap';
-  w.innerHTML=`<h2 class="pf-title r">${c.title}</h2><p class="pf-intro r">${c.intro}</p>`;
+  w.innerHTML=`<a class="btn back" href="#/portafolio">← Volver</a><h2 class="pf-title r">${c.title}</h2><p class="pf-intro r">${c.intro}</p>`;
   c.projects.forEach((p,k)=>{
     const dir=p.dir||`assets/${c.folder}/project${pad(k+1)}/`,a=document.createElement('article');a.className='cs';a.id=c.id+'-'+pad(k+1);
     const h=document.createElement('div');h.className='cs-h r';
@@ -354,7 +374,7 @@ PORTFOLIO.forEach(c=>{
       a.append(g,yt.full?box(yt.full,'yt',`${p.title} video completo`,fc):dr.full?box(dr.full,'drive',`${p.title} video completo`,fc):box(`${dir}full-video.mp4`,'video','',v?oc+' m-full-v':oc));
     }
     w.append(a)});
-  s.append(w);root.append(s)});
+  const bb=document.createElement('a');bb.className='btn back back-b';bb.href='#/portafolio';bb.textContent='← Volver';w.append(bb);s.append(w);root.append(s)});
 })();
 const nav=document.getElementById('nav'),lk=document.getElementById('lk'),bg=document.getElementById('bg');
 addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>40),{passive:true});
@@ -385,6 +405,22 @@ if(!r.ok||d.success===false||d.success==='false')throw 0;
 f.reset();ok.textContent='¡Mensaje enviado! Te responderé pronto.';
 }catch(_){ok.style.color='#ff8a7a';ok.textContent='No se pudo enviar. Escríbeme directamente a '+EMAIL+'.'}
 b.disabled=false});
+// ===== NAVEGACIÓN POR PÁGINAS (vistas) =====
+// #/ = inicio | #/sobre-mi = inicio, bajando a Sobre mí | #/proceso | #/contacto | #/social-media | #/branding | #/audiovisual
+// #/portafolio = inicio, bajando a las especialidades | #/social-media/01 = esa página, bajando al proyecto 01
+const VIEWS=[...document.querySelectorAll('.view')],NAVA=[...document.querySelectorAll('.links a[data-v]')];
+const ALIAS={'':'inicio',inicio:'inicio','sobre-mi':'inicio',portafolio:'inicio',especialidades:'inicio',proyectos:'inicio'};
+const ANCH={'sobre-mi':'sobre-mi',portafolio:'especialidades',especialidades:'especialidades',proyectos:'proyectos'};
+function route(){
+const [v='',sub]=location.hash.replace(/^#\/?/,'').split('/');
+let name=ALIAS[v]||v;if(!VIEWS.some(x=>x.dataset.view===name))name='inicio';
+VIEWS.forEach(x=>x.classList.toggle('on',x.dataset.view===name));
+NAVA.forEach(a=>a.classList.toggle('act',a.dataset.v===v));
+const t=document.getElementById(sub?name+'-'+sub:(ANCH[v]||''));
+scrollTo({top:0,behavior:'instant'});
+if(t)setTimeout(()=>t.scrollIntoView({behavior:'smooth'}),150);
+}
+addEventListener('hashchange',route);route();
 </script>
 </body>
 </html>
